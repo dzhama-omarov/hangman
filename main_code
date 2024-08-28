@@ -1,0 +1,175 @@
+import time
+import random
+
+#creating a list with words
+words_list = [
+    'Actor', 'Advertisement', 'Afternoon', 'Airport', 'Ambulance', 'Animal', 'Answer', 'Apple', 'Army', 'Australia',
+    'Balloon', 'Banana', 'Battery', 'Beach', 'Beard', 'Bed', 'Belgium', 'Boy', 'Branch', 'Breakfast', 'Brother',
+    'Camera', 'Candle', 'Car', 'Caravan', 'Carpet', 'Cartoon', 'China', 'Church', 'Crayon', 'Crowd',
+    'Daughter', 'Death', 'Denmark', 'Diamond', 'Dinner', 'Disease', 'Doctor', 'Dog', 'Dream', 'Dress',
+    'Easter', 'Egg', 'Eggplant', 'Egypt', 'Elephant', 'Energy', 'Engine', 'England', 'Evening', 'Eye',
+    'Family', 'Finland', 'Fish', 'Flag', 'Flower', 'Football', 'Forest', 'Fountain', 'France', 'Furniture',
+    'Garage', 'Garden', 'Gas', 'Ghost', 'Girl', 'Glass', 'Gold', 'Grass', 'Greece', 'Guitar',
+    'Hair', 'Hamburger', 'Helicopter', 'Helmet', 'Holiday', 'Honey', 'Horse', 'Hospital', 'House', 'Hydrogen',
+    'Ice', 'Insect', 'Insurance', 'Iron', 'Island',
+    'Jackal', 'Jelly', 'Jewelry', 'Jordan', 'Juice',
+    'Kangaroo', 'King', 'Kitchen', 'Kite', 'Knife',
+    'Lamp', 'Lawyer', 'Leather', 'Library', 'Lighter', 'Lion', 'Lizard', 'Lock', 'London', 'Lunch',
+    'Machine', 'Magazine', 'Magician', 'Manchester', 'Market', 'Match', 'Microphone', 'Monkey', 'Morning', 'Motorcycle',
+    'Nail', 'Napkin', 'Needle', 'Nest', 'Nigeria', 'Night', 'Notebook',
+    'Ocean', 'Oil', 'Orange', 'Oxygen', 'Oyster',
+    'Painting', 'Parrot', 'Pencil', 'Piano', 'Pillow', 'Pizza', 'Planet', 'Plastic', 'Portugal', 'Potato',
+    'Queen', 'Quill',
+    'Rain', 'Rainbow', 'Raincoat', 'Refrigerator', 'Restaurant', 'River', 'Rocket', 'Room', 'Rose', 'Russia',
+    'Sandwich', 'School', 'Scooter', 'Shampoo', 'Shoe', 'Soccer', 'Spoon', 'Stone', 'Sugar', 'Sweden',
+    'Teacher', 'Telephone', 'Television', 'Tent', 'Thailand', 'Tomato', 'Toothbrush', 'Traffic', 'Train', 'Truck',
+    'Uganda', 'Umbrella',
+    'Van', 'Vase', 'Vegetable', 'Vulture',
+    'Wall', 'Whale', 'Window', 'Wire',
+    'Xylophone',
+    'Yacht', 'Yak',
+    'Zebra', 'Zoo'
+]
+
+#creating mistake images and saving them into a list
+p0 = """
+_______
+|    |
+|    O
+|   
+|   
+|
+-----------
+"""
+p1 = """
+_______
+|    |
+|    O
+|    |
+|    
+|
+-----------
+"""
+p2 = """
+_______
+|    |
+|    O
+|    |
+|    /
+|
+-----------
+"""
+p3 = """
+_______
+|    |
+|    O
+|    |
+|   /|
+|
+-----------
+"""
+p4 = """
+_______
+|    |
+|    O
+|   ||
+|   /|
+|
+-----------
+"""
+p5 = """
+_______      
+|    |  
+|    O  
+|   |||       
+|   /|   
+|      
+-----------      
+"""
+pictures = [p0, p1, p2, p3, p4, p5]
+
+size = len(words_list)
+
+#creating "main menu"
+def main():
+    print("Hi! Are you ready to play some hangman?(y - yes; n - no). Our dictionary cosist of " + str(size) + " words :)")
+    while True:
+        inp = input().lower().strip()
+        if inp == "y":
+            start_game()
+            break
+        elif inp == "n":
+            print("Ok, I'll wait. Just type 'y' when you are ready")
+        else:
+            print("Please, type 'y' or 'n'")
+
+
+def start_game():
+    print("Let me think of a word")
+
+    #loading
+    for _ in range(3):
+        time.sleep(0.5)
+        print(".")
+        time.sleep(0.5)
+        print("..")
+        time.sleep(0.5)
+        print("...")
+
+    #setting up the preperations
+    my_word = random.choice(words_list)
+    my_word = my_word.lower()
+    print("Yes! I have it. Try to guess it. Here is the gallow and hidden letters:")
+    print(p0)
+    n_of_letters = len(my_word)
+    print("_ " * n_of_letters)
+    mistakes = 0
+    cur_word = "_" * n_of_letters
+
+    #starting a loop which ends with a win or loose
+    while cur_word.find("_") != -1 and mistakes < 5:
+        print("""
+type in a letter""")
+        input_letter = input().strip().lower()
+        letter_positions = []
+
+        #checking if input is not more than one letter
+        if len(input_letter) != 1:
+            print("please, type only one letter")
+        else:
+            
+            #checking if input letter is in the word
+            if my_word.find(input_letter) == -1:
+                mistakes += 1
+                print("Oops, your there is no such letter in my word")
+                print(pictures[mistakes])
+                print(cur_word)
+            else:
+                letter_positions.append(my_word.find(input_letter))
+                
+                #starting a loop of finding all occurances of input letter in a word
+                while letter_positions[-1] <= len(my_word):
+                    if my_word.find(input_letter, letter_positions[-1] + 1) != -1:
+                        letter_positions.append(my_word.find(input_letter, letter_positions[-1] + 1))
+                    else:
+                        break
+                
+                #changing all "_" to guessed letter
+                for _ in range(len(letter_positions)):
+                    x = letter_positions[_]
+                    cur_word = cur_word[0:x] + input_letter + cur_word[x+1:]
+                
+                #printing game info if not all letters are guessed
+                if cur_word.find("_") != -1:
+                    print("You're right! Take another guess")
+                    print(pictures[mistakes])
+                    print(cur_word)
+    
+    #choosing an end scenario
+    if mistakes < 5:
+        print("YOU WON! :)))")
+    else:
+        print("YOU LOST :(")
+        print("The word was: " + my_word)
+
+main()
