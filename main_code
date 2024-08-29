@@ -92,7 +92,7 @@ size = len(words_list)
 
 #creating "main menu"
 def main():
-    print("Hi! Are you ready to play some hangman?(y - yes; n - no). Our dictionary cosist of " + str(size) + " words :)")
+    print(f"Hi! Are you ready to play some hangman?(y - yes; n - no). Our dictionary consist of {str(size)} words :)")
     while True:
         inp = input().lower().strip()
         if inp == "y":
