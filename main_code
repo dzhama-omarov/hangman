@@ -2,7 +2,7 @@ import time
 import random
 
 #creating a list with words
-words_list = [
+words_list_en = [
     'Actor', 'Advertisement', 'Afternoon', 'Airport', 'Ambulance', 'Animal', 'Answer', 'Apple', 'Army', 'Australia',
     'Balloon', 'Banana', 'Battery', 'Beach', 'Beard', 'Bed', 'Belgium', 'Boy', 'Branch', 'Breakfast', 'Brother',
     'Camera', 'Candle', 'Car', 'Caravan', 'Carpet', 'Cartoon', 'China', 'Church', 'Crayon', 'Crowd',
@@ -29,6 +29,31 @@ words_list = [
     'Xylophone',
     'Yacht', 'Yak',
     'Zebra', 'Zoo'
+]
+
+words_list_ru = [
+    'бог',
+    'век', 'вечер', 'взгляд', 'вид', 'власть', 'вода', 'возможность', 'война', 'вопрос', 'время',
+    'глаз', 'год', 'голова', 'голос', 'город', 'государство', 'группа',
+    'дверь', 'действие', 'дело', 'день', 'деньги', 'деятельность', 'дом', 'дорога', 'друг', 'душа',
+    'жена', 'женщина', 'жизнь',
+    'закон', 'земля',
+    'имя', 'история',
+    'качество', 'книга', 'комната', 'компания', 'конец',
+    'лицо', 'любовь',
+    'мама', 'мать', 'машина', 'место', 'месяц', 'минута', 'мир', 'момент', 'мысль',
+    'народ', 'начало', 'нога', 'ночь',
+    'область', 'образ', 'общество', 'организация', 'отец', 'отношение',
+    'пора', 'порядок', 'право', 'президент', 'проблема', 'процесс', 'путь',
+    'работа', 'раз', 'развитие', 'ребенок', 'результат', 'решение', 'рука',
+    'свет', 'связь', 'сила', 'система', 'слово', 'случай', 'средство', 'статья', 'стол', 'сторона', 'страна', 'суд',
+    'театр', 'тысяча',
+    'улица', 'уровень', 'условие',
+    'форма',
+    'цель',
+    'час', 'часть', 'человек', 'число',
+    'школа',
+    'язык'
 ]
 
 #creating mistake images and saving them into a list
@@ -88,62 +113,298 @@ _______
 """
 pictures = [p0, p1, p2, p3, p4, p5]
 
-size = len(words_list)
+#creating dictionary in dictionary with texts
+texts = {
+    'en' :{
+        'main_txt' : '''_______________________________Main menu_______________________________
+Welcome to Hangman game!
+1 - Start the game
+2 - Rules
+3 - Settings
+4 - Credits
+          ''',
+        'rules_txt' : '''_______________________________Rules_______________________________
+            Hangman is a simple word guessing game. 
+            Player tries to figure out an unknown word by guessing letters. 
+            If too many letters which do not appear in the word are guessed, the player is hanged (and loses).
+
+            b - Back
+                    ''',
+        'settings_txt' : '''_______________________________Settings_______________________________
+            1 - Number of lives
+            2 - Language
+
+            b - Back
+                    ''',
+        'credits_txt' : '''_______________________________Credits_______________________________
+            This game was made by Omarov Dzhamaluddin as a beginner project. 
+            It uses basic python language and it was made with as little AI help as possible. 
+            I intentionally was using just simple internet searches, beacuse I think that its better for educational purposes.
+            Hope you liked this game as much as I did programming it. Have a nice day and I wish you luck and happiness in life :)
+                    
+            b - Back
+            ''',
+        'n_of_l_txt' : '''_______________________________Number of lives_______________________________
+            Type in how many lives you would like to have (5 max)
+
+            b - Back
+            ''',
+        'lang_txt' : '''_______________________________Language_______________________________
+            Please, choose language:
+            1 - English
+            2 - Russian
+
+            b - Back
+            ''',
+        'easter_egg_txt' : '''
+            (⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)
+            (⌐■_■)Well done! You've found an easter egg (⌐■_■)
+            (⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)
+
+            b - Back
+                    ''',
+        'sg_txt1' : '''
+            ______________________
+            |Let me think of a word|
+            ----------------------
+            ''',
+        'sg_txt2' : '''
+            Yes! I have it. Try to guess it. Here is the gallow and hidden letters:
+            ''',
+        'sg_txt3' : 'Type in a letter',
+        'sg_txt4' : 'Please, type only one letter',
+        'sg_txt5' : 'Oops, there is no such letter in my word',
+        'sg_txt6' : 'You are right! Take another guess',
+        'sg_txt7' : 'YOU WON! :)))',
+        'sg_txt8' : 'YOU LOST :(',
+        'sg_txt9' : 'The word was: ',
+        'sg_txt10' : '''
+            g - Start again
+            b - Main menu
+            ''',
+        'sg_txt_err' : '''
+Invalid input. Please enter "g" to restart the game or "b" to go to the main menu
+''',
+    }, 
+    'ru' :{
+        'main_txt' : '''_______________________________Главное меню_______________________________
+Добро пожаловать в игру "Виселица"!
+1 - Начать игру
+2 - Правила
+3 - Настройки
+4 - Об игре
+          ''',
+        'rules_txt' : '''_______________________________Правила_______________________________
+        "Виселица" - это простая игра на угадывание слов. 
+        Игрок пытаются разгадать неизвестное слово, угадывая буквы. 
+        Если угадывается слишком много букв, которых нет в слове, игрок оказывается повешенным (и проигрывает).
+
+        b - Назад
+                ''',
+        'settings_txt' : '''_______________________________Настройки_______________________________
+        1 - Количество жизней
+        2 - Язык
+
+        b - Назад
+                ''',
+        'credits_txt' : '''_______________________________Об игре_______________________________
+        Эта игра была создана Омаровым Джамалуддином в качестве проекта для начинающих. 
+        В ней используется базовый язык python, и она была создана с минимальной помощью от искусственного интеллекта. 
+        Я намеренно использовал простой поиск в Интернете, потому что считаю, что это лучше для образовательных целей.
+        Надеюсь, вам понравилась эта игра так же, как мне понравилось ее программирование. Хорошего дня, и я желаю вам удачи и счастья в жизни :)
+        
+        b - Назад
+        ''',
+        'n_of_l_txt' : '''_______________________________Количество жизней_______________________________
+        Укажите, сколько жизней вы хотели бы иметь (максимум 5)
+
+        b - Назад
+        ''',
+        'lang_txt' : '''_______________________________Язык_______________________________
+        Пожалуйста, выберите язык:
+        1 - Английский
+        2 - Русский
+
+        b - Назад
+        ''',
+        'easter_egg_txt' : '''
+        (⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)
+        (⌐■_■)Молодец! Ты нашел пасхалку (⌐■_■)
+        (⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)
+
+        b - Назад
+        ''',
+        'sg_txt1' : '''
+        ____________________________________________
+        |Дай мне минутку придумать какое-нибудь слово|
+        --------------------------------------------
+        ''',
+        'sg_txt2' : '''
+        Придумал! Попробуй угадать. Вот виселица и скрытые буквы:
+        ''',
+        'sg_txt3' : 'Напиши букву',
+        'sg_txt4' : 'Пожалуйста, пиши по одной букве',
+        'sg_txt5' : 'Ой, такой буквы нет в моем слове',
+        'sg_txt6' : 'Верно! Загадай новую букву',
+        'sg_txt7' : '''____________________________________________________________________
+        Победа! :)))
+        ''',
+        'sg_txt8' : '''____________________________________________________________________
+        Проигрыш! :(
+            ''',
+        'sg_txt9' : 'Я загадал слово: ',
+        'sg_txt10' : ''' -----------------
+|g - Начать заново|
+|b - Главное меню |
+ -----------------''',
+        'sg_txt_err' : '''
+Неверный ввод. Пожалуйста, введите "g", чтобы перезапустить игру, или "b", чтобы перейти в главное меню
+'''
+    }
+}
+
+
 
 #creating "main menu"
-def main():
-    print(f"Hi! Are you ready to play some hangman?(y - yes; n - no). Our dictionary consist of {str(size)} words :)")
-    while True:
-        inp = input().lower().strip()
-        if inp == "y":
-            start_game()
-            break
-        elif inp == "n":
-            print("Ok, I'll wait. Just type 'y' when you are ready")
-        else:
-            print("Please, type 'y' or 'n'")
+def main(language='ru', n_of_l = '5'):
+    print(texts[language]['main_txt'])
 
+    main_inp = input().lower().strip()
 
-def start_game():
-    print("Let me think of a word")
+    if main_inp == "1":
+        start_game(language,n_of_l)
+    elif main_inp == "2":
+        rules(language, n_of_l)
+    elif main_inp == "3":
+        settings(language, n_of_l)
+    elif main_inp == "4":
+        credits(language, n_of_l)
+    elif main_inp == "easter":
+        easter_egg(language, n_of_l)
+    else:
+        main(language, n_of_l)
+
+#creating rules secction
+def rules(language = 'ru', n_of_l = '5'):
+    print(texts[language]['rules_txt'])
+
+    if input().lower().strip() == "b":
+        main(language, n_of_l)
+    else:
+        rules(language, n_of_l)
+
+#creating setting menu
+def settings(language = 'ru', n_of_l = '5'):
+    print(texts[language]['settings_txt'])
+
+    set_input = input()
+
+    if set_input == "1":
+        n_of_l_set(language, n_of_l)
+    elif set_input == "2":
+        lang_set(language, n_of_l)
+    elif set_input == "b":
+        main(language, n_of_l)
+    else:
+        settings(language, n_of_l)
+
+#creating number of lives submenu
+def n_of_l_set(language = 'ru', n_of_l = '5'):
+    print(texts[language]['n_of_l_txt'])
+
+    nofl_input = input().lower().strip()
+    if nofl_input.isdigit() == True and len(nofl_input) == 1:
+        n_of_l = int(nofl_input)
+        if language == "en":
+            print(f"Number of lives is set to {nofl_input}")
+        elif language == "ru":
+            print(f"Количество жизней установлено на {nofl_input}")
+        n_of_l_set(language, n_of_l)
+    elif nofl_input == "b":
+        settings(language, n_of_l)
+    else:
+        n_of_l_set(language, n_of_l)
+
+#creating language submenu
+def lang_set(language = 'ru', n_of_l = '5'):
+    print(texts[language]['lang_txt'])
+
+    lang_input = input()
+    if lang_input == "1":
+        print("Language set to english")
+        language = "en"
+        lang_set(language, n_of_l)
+    elif lang_input == "2":
+        print("Язык установлен на русский")
+        language = "ru"
+        lang_set(language, n_of_l)
+    elif lang_input == "b":
+        settings(language, n_of_l)
+    else:
+        lang_set(language, n_of_l)
+
+#creating credits secction
+def credits(language = 'ru', n_of_l = '5'):
+    print(texts[language]['credits_txt'])
+
+    if input() == "b":
+        main(language, n_of_l)
+    else:
+        credits(language, n_of_l)
+
+#creating an easter egg page
+def easter_egg(language = 'ru', n_of_l = '5'):
+    print(texts[language]['easter_egg_txt'])
+
+    if input() == "b":
+        main(language, n_of_l)
+    else:
+        easter_egg(language, n_of_l)
+
+#creating game code
+def start_game(language = 'ru', n_of_l = '5'):
+    print(texts[language]['sg_txt1'])
 
     #loading
-    for _ in range(3):
+    '''for _ in range(3):
         time.sleep(0.5)
         print(".")
         time.sleep(0.5)
         print("..")
         time.sleep(0.5)
-        print("...")
+        print("...")'''
 
     #setting up the preperations
-    my_word = random.choice(words_list)
+    if language == "en":
+        my_word = random.choice(words_list_en)
+    elif language == "ru":
+        my_word = random.choice(words_list_ru)
+    mistakes = 5 - int(n_of_l)
     my_word = my_word.lower()
-    print("Yes! I have it. Try to guess it. Here is the gallow and hidden letters:")
-    print(p0)
     n_of_letters = len(my_word)
-    print("_ " * n_of_letters)
-    mistakes = 0
     cur_word = "_" * n_of_letters
+    print(texts[language]['sg_txt2'])
+    print(pictures[mistakes])
+   
+    print("_ " * n_of_letters)
 
     #starting a loop which ends with a win or loose
     while cur_word.find("_") != -1 and mistakes < 5:
-        print("""
-type in a letter""")
+        print(texts[language]['sg_txt3'])
         input_letter = input().strip().lower()
         letter_positions = []
 
         #checking if input is not more than one letter
         if len(input_letter) != 1:
-            print("please, type only one letter")
+            print(texts[language]['sg_txt4'])
         else:
             
             #checking if input letter is in the word
             if my_word.find(input_letter) == -1:
                 mistakes += 1
-                print("Oops, your there is no such letter in my word")
+                print(texts[language]['sg_txt5'])
                 print(pictures[mistakes])
-                print(cur_word)
+                print(' '.join(cur_word))
             else:
                 letter_positions.append(my_word.find(input_letter))
                 
@@ -161,15 +422,30 @@ type in a letter""")
                 
                 #printing game info if not all letters are guessed
                 if cur_word.find("_") != -1:
-                    print("You're right! Take another guess")
+                    print(texts[language]['sg_txt6'])
                     print(pictures[mistakes])
-                    print(cur_word)
+                    print(' '.join(cur_word))
     
     #choosing an end scenario
     if mistakes < 5:
-        print("YOU WON! :)))")
+        print(texts[language]['sg_txt7'])
     else:
-        print("YOU LOST :(")
-        print("The word was: " + my_word)
-
+        print(texts[language]['sg_txt8'])
+        print(texts[language]['sg_txt9'] + my_word)
+    
+    aft_g_c = 0
+    while True:
+        print(texts[language]['sg_txt10'])
+        
+        aft_g_c_input = input()
+        
+        if aft_g_c_input == "g":
+            start_game(language, n_of_l)
+            break
+        elif aft_g_c_input == "b":
+            main(language, n_of_l)
+            break
+        else:
+            print(texts[language]['sg_txt_err'])
+    
 main()
