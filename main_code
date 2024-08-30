@@ -285,7 +285,7 @@ def main(language='ru', n_of_l = '5'):
         main(language, n_of_l)
 
 #creating rules secction
-def rules(language = 'ru', n_of_l = '5'):
+def rules(language = 'en', n_of_l = '5'):
     print(texts[language]['rules_txt'])
 
     if input().lower().strip() == "b":
@@ -294,7 +294,7 @@ def rules(language = 'ru', n_of_l = '5'):
         rules(language, n_of_l)
 
 #creating setting menu
-def settings(language = 'ru', n_of_l = '5'):
+def settings(language = 'en', n_of_l = '5'):
     print(texts[language]['settings_txt'])
 
     set_input = input()
@@ -309,7 +309,7 @@ def settings(language = 'ru', n_of_l = '5'):
         settings(language, n_of_l)
 
 #creating number of lives submenu
-def n_of_l_set(language = 'ru', n_of_l = '5'):
+def n_of_l_set(language = 'en', n_of_l = '5'):
     print(texts[language]['n_of_l_txt'])
 
     nofl_input = input().lower().strip()
@@ -326,7 +326,7 @@ def n_of_l_set(language = 'ru', n_of_l = '5'):
         n_of_l_set(language, n_of_l)
 
 #creating language submenu
-def lang_set(language = 'ru', n_of_l = '5'):
+def lang_set(language = 'en', n_of_l = '5'):
     print(texts[language]['lang_txt'])
 
     lang_input = input()
@@ -344,7 +344,7 @@ def lang_set(language = 'ru', n_of_l = '5'):
         lang_set(language, n_of_l)
 
 #creating credits secction
-def credits(language = 'ru', n_of_l = '5'):
+def credits(language = 'en', n_of_l = '5'):
     print(texts[language]['credits_txt'])
 
     if input() == "b":
@@ -353,7 +353,7 @@ def credits(language = 'ru', n_of_l = '5'):
         credits(language, n_of_l)
 
 #creating an easter egg page
-def easter_egg(language = 'ru', n_of_l = '5'):
+def easter_egg(language = 'en', n_of_l = '5'):
     print(texts[language]['easter_egg_txt'])
 
     if input() == "b":
@@ -362,7 +362,7 @@ def easter_egg(language = 'ru', n_of_l = '5'):
         easter_egg(language, n_of_l)
 
 #creating game code
-def start_game(language = 'ru', n_of_l = '5'):
+def start_game(language = 'en', n_of_l = '5'):
     print(texts[language]['sg_txt1'])
 
     #loading
