@@ -1,8 +1,9 @@
 import time
 import random
 
-#creating a list with words
-words_list_en = [
+#creating a dictionary with words lists
+word_list = {
+    'en' : [
     'Actor', 'Advertisement', 'Afternoon', 'Airport', 'Ambulance', 'Animal', 'Answer', 'Apple', 'Army', 'Australia',
     'Balloon', 'Banana', 'Battery', 'Beach', 'Beard', 'Bed', 'Belgium', 'Boy', 'Branch', 'Breakfast', 'Brother',
     'Camera', 'Candle', 'Car', 'Caravan', 'Carpet', 'Cartoon', 'China', 'Church', 'Crayon', 'Crowd',
@@ -29,9 +30,8 @@ words_list_en = [
     'Xylophone',
     'Yacht', 'Yak',
     'Zebra', 'Zoo'
-]
-
-words_list_ru = [
+],
+    'ru' : [
     'бог',
     'век', 'вечер', 'взгляд', 'вид', 'власть', 'вода', 'возможность', 'война', 'вопрос', 'время',
     'глаз', 'год', 'голова', 'голос', 'город', 'государство', 'группа',
@@ -54,7 +54,53 @@ words_list_ru = [
     'час', 'часть', 'человек', 'число',
     'школа',
     'язык'
-]
+],
+    'de' : [
+    'Abend', 'Anfang', 'Arbeit', 'Art', 'Aufgabe', 'Auge', 'Auto',
+    'Bedeutung', 'Beispiel', 'Bereich', 'Bild', 'Blick', 'Buch', 'Buch',
+    'Ding',
+    'Eltern Ende', 'Entwicklung', 'Ergebnis',
+    'Fall', 'Familie', 'Folge', 'Form Frage', 'Frau', 'Freund',
+    'Geld', 'Geschichte', 'Gesellschaft', 'Gesicht', 'Gespräch', 'Grund', 'Gruppe',
+    'Hand', 'Haus', 'Herr',
+    'Interesse',
+    'Jahr',
+    'Kind', 'Kopf', 'Krieg',
+    'Land', 'Leben', 'Leute',
+    'Mal', 'Mann', 'Mensch', 'Milliarde', 'Million', 'Minute', 'Möglichkeit', 'Moment', 'Monat', 'Morgen', 'Mutter',
+    'Nacht', 'Name',
+    'Ort',
+    'Paar', 'Person', 'Platz', 'Problem', 'Prozent',
+    'Raum', 'Recht', 'Regierung', 'Rolle',
+    'Sache', 'Schule', 'Schüler', 'Seite', 'Sinn', 'Sprache', 'Staat', 'Stadt', 'Stelle', 'Straße', 'Stück', 'Stunde', 'System',
+    'Tag', 'Teil', 'Text', 'Thema', 'Tür',
+    'Uhr', 'Uni Universität', 'Unternehmen',
+    'Vater',
+    'Wasser', 'Weg', 'Weise', 'Welt', 'Wert', 'Woche Wohnung', 'Wort',
+    'Zahl', 'Zeit', 'Ziel',
+
+],
+    'fr' : [
+    'air', 'ami', 'animaux', 'appel', 'aprè-midi', 'arbre', 'argent',
+    'bois', 'bras', 'bureau', 'bureau',
+    'chambre', 'chanson', 'cheval', 'chien', 'chose', 'coeur', 'corps', 'couleurs',
+    'docteur', 'dos',
+    'eau', 'enfants', 'enfants', 'enfants', 'été', 'étoile', 'exemple',
+    'famille', 'fenêtre', 'ferme', 'feu', 'fille', 'fleur', 'fleur',
+    'glace', 'groupe',
+    'histoire', 'hiver', 'homme', 'île', 'jambe', 'jardin', 'jeune', 'jour', 'jour', 'journal',
+    'lettre', 'ligne', 'liste', 'liste', 'lit', 'lune',
+    'mar', 'marque', 'matin', 'mer', 'mère', 'minute', 'mois', 'monde', 'montagne', 'montagnes', 'montagnes', 'mot', 'musique',
+    'nom', 'nuit', 'numéro',
+    'oeil', 'oiseau',
+    'page', 'pays', 'père', 'personne', 'pied', 'porte', 'produit',
+    'question',
+    'rivière', 'roi', 'rue',
+    'science', 'semaine', 'sol', 'soleil',
+    'tables', 'terre', 'tête', 'train', 'travail',
+    'vent', 'vie', 'ville', 'vin', 'visage', 'voiture', 'voiture', 'voiture'
+    ]
+}
 
 #creating mistake images and saving them into a list
 p0 = """
@@ -118,6 +164,7 @@ texts = {
     'en' :{
         'main_txt' : '''_______________________________Main menu_______________________________
 Welcome to Hangman game!
+
 1 - Start the game
 2 - Rules
 3 - Settings
@@ -131,60 +178,59 @@ Welcome to Hangman game!
             b - Back
                     ''',
         'settings_txt' : '''_______________________________Settings_______________________________
-            1 - Number of lives
-            2 - Language
+1 - Number of lives
+2 - Language
 
-            b - Back
-                    ''',
+b - Back
+        ''',
         'credits_txt' : '''_______________________________Credits_______________________________
-            This game was made by Omarov Dzhamaluddin as a beginner project. 
-            It uses basic python language and it was made with as little AI help as possible. 
-            I intentionally was using just simple internet searches, beacuse I think that its better for educational purposes.
-            Hope you liked this game as much as I did programming it. Have a nice day and I wish you luck and happiness in life :)
+This game was made by Omarov Dzhamaluddin as a beginner project. 
+It uses basic python language and it was made with as little AI help as possible. 
+I intentionally was using just simple internet searches, beacuse I think that its better for educational purposes.
+Hope you liked this game as much as I did programming it. Have a nice day and I wish you luck and happiness in life :)
                     
-            b - Back
-            ''',
+b - Back
+        ''',
         'n_of_l_txt' : '''_______________________________Number of lives_______________________________
-            Type in how many lives you would like to have (5 max)
+Type in how many lives you would like to have (5 max)
 
-            b - Back
-            ''',
+b - Back
+        ''',
         'lang_txt' : '''_______________________________Language_______________________________
-            Please, choose language:
-            1 - English
-            2 - Russian
+Please, choose language:
 
-            b - Back
-            ''',
+1 - English
+2 - Русский
+3 - Deutsch
+4 - Française
+
+b - Back
+        ''',
         'easter_egg_txt' : '''
-            (⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)
-            (⌐■_■)Well done! You've found an easter egg (⌐■_■)
-            (⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)
+ (⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)
+(⌐■_■)Well done! You've found an easter egg (⌐■_■)
+ (⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)
 
-            b - Back
-                    ''',
+b - Back
+        ''',
         'sg_txt1' : '''
-            ______________________
-            |Let me think of a word|
-            ----------------------
+ ______________________
+|Let me think of a word|
+ ----------------------
             ''',
         'sg_txt2' : '''
-            Yes! I have it. Try to guess it. Here is the gallow and hidden letters:
+Yes! I have it. Try to guess it. Here is the gallow and hidden letters:
             ''',
         'sg_txt3' : 'Type in a letter',
         'sg_txt4' : 'Please, type only one letter',
         'sg_txt5' : 'Oops, there is no such letter in my word',
         'sg_txt6' : 'You are right! Take another guess',
-        'sg_txt7' : '''____________________________________________________________________
-YOU WON! :)))
-''',
-        'sg_txt8' : '''____________________________________________________________________
-YOU LOST :(
-''',
+        'sg_txt7' : 'YOU WON! :)))',
+        'sg_txt8' : 'YOU LOST :(',
         'sg_txt9' : 'The word was: ',
         'sg_txt10' : '''
-            g - Start again
-            b - Main menu
+g - Start again
+b - Main menu
             ''',
         'sg_txt_err' : '''
 Invalid input. Please enter "g" to restart the game or "b" to go to the main menu
@@ -193,68 +239,72 @@ Invalid input. Please enter "g" to restart the game or "b" to go to the main men
     'ru' :{
         'main_txt' : '''_______________________________Главное меню_______________________________
 Добро пожаловать в игру "Виселица"!
+
 1 - Начать игру
 2 - Правила
 3 - Настройки
 4 - Об игре
           ''',
         'rules_txt' : '''_______________________________Правила_______________________________
-        "Виселица" - это простая игра на угадывание слов. 
-        Игрок пытаются разгадать неизвестное слово, угадывая буквы. 
-        Если угадывается слишком много букв, которых нет в слове, игрок оказывается повешенным (и проигрывает).
+"Виселица" - это простая игра на угадывание слов. 
+Игрок пытаются разгадать неизвестное слово, угадывая буквы. 
+Если угадывается слишком много букв, которых нет в слове, игрок оказывается повешенным (и проигрывает).
 
-        b - Назад
+b - Назад
                 ''',
         'settings_txt' : '''_______________________________Настройки_______________________________
-        1 - Количество жизней
-        2 - Язык
+1 - Количество жизней
+2 - Язык
 
-        b - Назад
+b - Назад
                 ''',
         'credits_txt' : '''_______________________________Об игре_______________________________
-        Эта игра была создана Омаровым Джамалуддином в качестве проекта для начинающих. 
-        В ней используется базовый язык python, и она была создана с минимальной помощью от искусственного интеллекта. 
-        Я намеренно использовал простой поиск в Интернете, потому что считаю, что это лучше для образовательных целей.
-        Надеюсь, вам понравилась эта игра так же, как мне понравилось ее программирование. Хорошего дня, и я желаю вам удачи и счастья в жизни :)
+Эта игра была создана Омаровым Джамалуддином в качестве проекта для начинающих. 
+В ней используется базовый язык python, и она была создана с минимальной помощью от искусственного интеллекта. 
+Я намеренно использовал простой поиск в Интернете, потому что считаю, что это лучше для образовательных целей.
+Надеюсь, вам понравилась эта игра так же, как мне понравилось ее программирование. Хорошего дня, и я желаю вам удачи и счастья в жизни :)
         
-        b - Назад
+b - Назад
         ''',
         'n_of_l_txt' : '''_______________________________Количество жизней_______________________________
-        Укажите, сколько жизней вы хотели бы иметь (максимум 5)
+Укажите, сколько жизней вы хотели бы иметь (максимум 5)
 
-        b - Назад
+b - Назад
         ''',
         'lang_txt' : '''_______________________________Язык_______________________________
-        Пожалуйста, выберите язык:
-        1 - Английский
-        2 - Русский
+Пожалуйста, выберите язык:
 
-        b - Назад
+1 - English
+2 - Русский
+3 - Deutsch
+4 - Française
+
+b - Назад
         ''',
         'easter_egg_txt' : '''
-        (⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)
-        (⌐■_■)Молодец! Ты нашел пасхалку (⌐■_■)
-        (⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)
+ (⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)
+(⌐■_■)Молодец! Ты нашел пасхалку (⌐■_■)
+ ⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)
 
-        b - Назад
+b - Назад
         ''',
         'sg_txt1' : '''
-        ____________________________________________
-        |Дай мне минутку придумать какое-нибудь слово|
-        --------------------------------------------
+ ____________________________________________
+|Дай мне минутку придумать какое-нибудь слово|
+ --------------------------------------------
         ''',
         'sg_txt2' : '''
-        Придумал! Попробуй угадать. Вот виселица и скрытые буквы:
+Придумал! Попробуй угадать. Вот виселица и скрытые буквы:
         ''',
         'sg_txt3' : 'Напиши букву',
         'sg_txt4' : 'Пожалуйста, пиши по одной букве',
         'sg_txt5' : 'Ой, такой буквы нет в моем слове',
         'sg_txt6' : 'Верно! Загадай новую букву',
         'sg_txt7' : '''____________________________________________________________________
-        Победа! :)))
+Победа! :)))
         ''',
         'sg_txt8' : '''____________________________________________________________________
-        Проигрыш! :(
+Проигрыш! :(
             ''',
         'sg_txt9' : 'Я загадал слово: ',
         'sg_txt10' : ''' -----------------
@@ -264,13 +314,161 @@ Invalid input. Please enter "g" to restart the game or "b" to go to the main men
         'sg_txt_err' : '''
 Неверный ввод. Пожалуйста, введите "g", чтобы перезапустить игру, или "b", чтобы перейти в главное меню
 '''
-    }
+    },
+    'de' :{
+        'main_txt' : '''_______________________________ Hauptmenü _______________________________
+Willkommen beim Galgenmännchen-Spiel!
+
+1 - Spiel starten
+2 - Regeln
+3 - Einstellungen
+4 - Credits
+          ''',
+        'rules_txt' : '''_______________________________Regeln_______________________________
+Hangman ist ein einfaches Wortratespiel.
+Der Spieler versucht, ein unbekanntes Wort durch Erraten von Buchstaben herauszufinden.
+Wenn zu viele Buchstaben erraten werden, die nicht im Wort vorkommen, wird der Spieler gehängt (und verliert).
+
+b - Zurück
+                ''',
+        'settings_txt' : '''_______________________________Einstellungen_______________________________
+1 - Anzahl der Leben
+2 - Sprache
+
+b - Zurück
+''',
+        'credits_txt' : '''_______________________________Credits_______________________________
+Dieses Spiel wurde von Omarov Dzhamaluddin als Anfängerprojekt entwickelt.
+Es verwendet die grundlegende Programmiersprache Python und wurde mit so wenig KI-Hilfe wie möglich erstellt.
+Ich habe absichtlich nur einfache Internetsuchen verwendet, weil ich denke, dass dies für Bildungszwecke besser ist.
+Ich hoffe, Ihnen hat dieses Spiel genauso gut gefallen wie mir beim Programmieren. Ich wünsche Ihnen einen schönen Tag und viel Glück und Freude im Leben :)
+
+b - Zurück
+''',
+        'n_of_l_txt' : '''_______________________________Anzahl der Leben_______________________________
+Geben Sie ein, wie viele Leben Sie haben möchten (max. 5)
+
+b - Zurück
+''',
+'lang_txt' : '''_______________________________Sprache_______________________________
+Bitte wählen Sie die Sprache:
+
+1 - English
+2 - Русский
+3 - Deutsch
+4 - Française
+
+b - Zurück
+''',
+        'easter_egg_txt' : '''
+ (⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)
+(⌐■_■)Gut gemacht! Du hast ein Easter Egg gefunden (⌐■_■)
+ (⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)
+
+b - Zurück
+''',
+        'sg_txt1' : '''
+ ________________________________
+|Lass mich mir ein Wort überlegen|
+ --------------------------------
+''',
+        'sg_txt2' : '''
+Ja! Ich habe es. Versuch es zu erraten. Hier sind der Galgen und die versteckten Buchstaben:
+''',
+        'sg_txt3' : 'Geben Sie einen Buchstaben ein',
+        'sg_txt4' : 'Bitte geben Sie nur einen Buchstaben ein',
+        'sg_txt5' : 'Ups, in meinem Wort ist dieser Buchstabe nicht enthalten',
+        'sg_txt6' : 'Sie haben Recht! Raten Sie noch einmal',
+        'sg_txt7' : 'SIE HABEN GEWONNEN! :)))',
+        'sg_txt8' : 'SIE HABEN VERLOREN :(',
+        'sg_txt9' : 'Das Wort war: ',
+        'sg_txt10' : '''
+g - Neu starten
+b - Hauptmenü
+''',
+        'sg_txt_err' : '''
+Ungültige Eingabe. Bitte geben Sie "g" ein, um das Spiel neu zu starten, oder "b", um zum Hauptmenü zu gelangen
+''',
+    },
+    'fr' :{
+        'main_txt' : '''_______________________________Menu principal_______________________________
+Bienvenue au jeu du pendu!
+
+1 - Démarrer le jeu
+2 - Règles
+3 - Paramètres
+4 - Crédits
+''',
+        'rules_txt' : '''_______________________________Règles_______________________________
+Le pendu est un jeu de devinettes de mots simple.
+Le joueur essaie de deviner un mot inconnu en devinant des lettres.
+Si trop de lettres qui n'apparaissent pas dans le mot sont devinées, le joueur est pendu (et perd).
+
+b - Retour
+''',
+        'settings_txt' : '''_______________________________Paramètres_______________________________
+1 - Nombre de vies
+2 - Langue
+
+b - Retour
+''',
+        'credits_txt' : '''_______________________________Crédits_______________________________
+Ce jeu a été créé par Omarov Dzhamaluddin en tant que projet pour débutants.
+Il utilise le langage Python de base et a été réalisé avec le moins d'aide possible de l'IA.
+J'ai intentionnellement utilisé uniquement des recherches Internet simples, car je pense que c'est mieux à des fins éducatives.
+J'espère que vous avez aimé ce jeu autant que j'ai aimé le programmer. Passez une bonne journée et je vous souhaite bonne chance et bonheur dans la vie :)
+
+b - Retour
+''',
+        'n_of_l_txt' : '''_______________________________Nombre de vies_______________________________
+Tapez le nombre de vies que vous souhaitez avoir (5 max)
+
+b - Retour
+''',
+        'lang_txt' : '''_______________________________Langue_______________________________
+Veuillez choisir la langue:
+
+1 - English
+2 - Русский
+3 - Deutsch
+4 - Française
+
+b - Retour
+''',
+        'easter_egg_txt' : '''
+ (⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)
+(⌐■_■)Bien joué! Vous avez trouvé un œuf de Pâques (⌐■_■)
+ (⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)
+
+b - Retour
+''',
+        'sg_txt1' : '''
+ __________________________
+|Laisse-moi penser à un mot|
+ --------------------------
+''',
+'sg_txt2' : '''
+Oui! Je l'ai. Essaie de le deviner. Voici la potence et les lettres cachées:
+''',
+'sg_txt3': 'Saisissez une lettre',
+'sg_txt4': "Veuillez ne saisir qu'une seule lettre",
+'sg_txt5': "Oups, il n'y a pas de telle lettre dans mon mot",
+'sg_txt6': 'Vous avez raison! Essayez à nouveau',
+'sg_txt7': 'VOUS AVEZ GAGNÉ! :)))',
+'sg_txt8': 'VOUS AVEZ PERDU:(',
+'sg_txt9': 'Le mot était: ',
+'sg_txt10': '''
+g - Recommencer
+b - Menu principal
+''',
+        'sg_txt_err': '''
+Entrée non valide. Veuillez saisir «g» pour redémarrer le jeu ou «b» pour accéder au menu principal
+''',
+}
 }
 
-
-
 #creating "main menu"
-def main(language= 'en', n_of_l = '5'):
+def main(language = 'en', n_of_l = '5'):
     print(texts[language]['main_txt'])
 
     main_inp = input().lower().strip()
@@ -342,6 +540,14 @@ def lang_set(language = 'en', n_of_l = '5'):
         print("Язык установлен на русский")
         language = "ru"
         lang_set(language, n_of_l)
+    elif lang_input == "3":
+        print("Sprache auf Deutsch eingestellt")
+        language = "de"
+        lang_set(language, n_of_l)
+    elif lang_input == "4":
+        print("Langue définie sur français")
+        language = "fr"
+        lang_set(language, n_of_l)
     elif lang_input == "b":
         settings(language, n_of_l)
     else:
@@ -379,10 +585,7 @@ def start_game(language = 'en', n_of_l = '5'):
         print("...")'''
 
     #setting up the preperations
-    if language == "en":
-        my_word = random.choice(words_list_en)
-    elif language == "ru":
-        my_word = random.choice(words_list_ru)
+    my_word = random.choice(word_list[language])
     mistakes = 5 - int(n_of_l)
     my_word = my_word.lower()
     n_of_letters = len(my_word)
@@ -451,5 +654,6 @@ def start_game(language = 'en', n_of_l = '5'):
             break
         else:
             print(texts[language]['sg_txt_err'])
+
     
 main()
