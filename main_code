@@ -266,7 +266,7 @@ Invalid input. Please enter "g" to restart the game or "b" to go to the main men
 
 
 #creating "main menu"
-def main(language='ru', n_of_l = '5'):
+def main(language= 'en', n_of_l = '5'):
     print(texts[language]['main_txt'])
 
     main_inp = input().lower().strip()
