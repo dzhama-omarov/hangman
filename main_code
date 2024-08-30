@@ -175,8 +175,12 @@ Welcome to Hangman game!
         'sg_txt4' : 'Please, type only one letter',
         'sg_txt5' : 'Oops, there is no such letter in my word',
         'sg_txt6' : 'You are right! Take another guess',
-        'sg_txt7' : 'YOU WON! :)))',
-        'sg_txt8' : 'YOU LOST :(',
+        'sg_txt7' : '''____________________________________________________________________
+YOU WON! :)))
+''',
+        'sg_txt8' : '''____________________________________________________________________
+YOU LOST :(
+''',
         'sg_txt9' : 'The word was: ',
         'sg_txt10' : '''
             g - Start again
