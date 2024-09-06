@@ -2,13 +2,16 @@ import time
 import random
 import json
 
+
 def load_json(filename):
     with open(filename, "r") as file:
         return json.load(file)
 
+
 text = load_json("resources/texts.json")
 pictures = load_json("resources/pictures.json")
 word_lists = load_json("resources/word_lists.json")
+
 
 def print_from_imported_json(resource_type, key, language="en"):
     try:
@@ -17,11 +20,12 @@ def print_from_imported_json(resource_type, key, language="en"):
     except KeyError:
         print(f"No such key in json {resource_type} file.")
 
+
 def main_menu():
     global language
     global number_of_lives
     while True:
-        print_from_imported_json(text,"main_menu_txt", language)
+        print_from_imported_json(text, "main_menu_txt", language)
         choice = input().lower().strip()
         if choice == "1":
             already_given_letters = []
@@ -29,7 +33,10 @@ def main_menu():
             while "_" in current_word and number_of_lives > 0:
                 input_letter = guessing_letter(already_given_letters)
                 already_given_letters.append(input_letter)
-                current_word = letter_check(my_word, current_word, input_letter)
+                current_word = letter_check(
+                                            my_word,
+                                            current_word,
+                                            input_letter)
             end_game(my_word)
         elif choice == "2":
             rules_page()
@@ -42,6 +49,7 @@ def main_menu():
         else:
             print_from_imported_json(text, "known_input_err_txt", language)
 
+
 def rules_page():
     global language
     while True:
@@ -53,6 +61,7 @@ def rules_page():
             break
     return
 
+
 def easter_egg_page():
     global language
     while True:
@@ -63,7 +72,8 @@ def easter_egg_page():
         else:
             break
     return
-    
+
+
 def credits_page():
     global language
     while True:
@@ -75,6 +85,7 @@ def credits_page():
             break
     return
 
+
 def settings_menu():
     global language
     while True:
@@ -83,12 +94,13 @@ def settings_menu():
         if choice == "1":
             lives_settings()
         elif choice == "2":
-            language_settings() 
+            language_settings()
         elif choice == "b":
             break
         else:
             print_from_imported_json(text, "known_input_err_txt", language)
     return
+
 
 def lives_settings():
     global language
@@ -103,7 +115,8 @@ def lives_settings():
         else:
             number_of_lives = int(choice)
             print_from_imported_json(text, "lives_changed_txt", language)
-        
+
+
 def language_settings():
     global language
     while True:
@@ -122,9 +135,10 @@ def language_settings():
             print_from_imported_json(text, "language_changed_txt", language)
         elif choice == "4":
             language = "fr"
-            print_from_imported_json(text, "language_changed_txt", language) 
+            print_from_imported_json(text, "language_changed_txt", language)
         else:
-            break  
+            break
+
 
 def setup_game():
     global language
@@ -138,14 +152,15 @@ def setup_game():
         print("..")
         time.sleep(0.5)
         print("...")
-    my_word = random.choice(word_lists[language]).lower()    
+    my_word = random.choice(word_lists[language]).lower()
     print_from_imported_json(text, "in_game_txt2", language)
     print_from_imported_json(pictures, f"p{5-number_of_lives}")
-    
+
     current_word = "_" * len(my_word)
     print(" ".join(current_word))
     print_from_imported_json(text, "in_game_txt3", language)
     return my_word, current_word
+
 
 def guessing_letter(already_given_letters):
     global language
@@ -153,13 +168,14 @@ def guessing_letter(already_given_letters):
 
     while True:
         input_letter = input().lower().strip()
-        if len(input_letter) != 1 or input_letter.isalpha() == False:
+        if len(input_letter) != 1 or not input_letter.isalpha():
             print_from_imported_json(text, "in_game_input_err_txt", language)
         elif input_letter in already_given_letters:
             print_from_imported_json(text, "in_game_same_letter_txt", language)
         else:
             break
     return input_letter
+
 
 def letter_check(my_word, current_word, input_letter):
     global language
@@ -168,9 +184,10 @@ def letter_check(my_word, current_word, input_letter):
     if input_letter in my_word:
         print_from_imported_json(text, "in_game_txt5", language)
         current_word = "".join(
-    input_letter if my_word[i] == input_letter else current_word[i]
-    for i in range(len(my_word))
-    )
+                                input_letter if my_word[i]
+                                == input_letter else current_word[i]
+                                for i in range(len(my_word))
+                                )
         print_from_imported_json(pictures, f"p{5-number_of_lives}")
         print(" ".join(current_word))
         print_from_imported_json(text, "in_game_txt3", language)
@@ -182,7 +199,8 @@ def letter_check(my_word, current_word, input_letter):
         print(" ".join(current_word))
         print_from_imported_json(text, "in_game_txt3", language)
         return current_word
-    
+
+
 def end_game(my_word):
     global number_of_lives
     while True:
@@ -203,7 +221,9 @@ def end_game(my_word):
             number_of_lives = 5
             break
 
+
 language = "en"
 number_of_lives = 5
 
-main_menu()
+if __name__ == '__main__':
+    main_menu()
