@@ -144,7 +144,7 @@ def setup_game():
     
     current_word = "_" * len(my_word)
     print(" ".join(current_word))
-    print_from_imported_json(text, "in_game_txt3")
+    print_from_imported_json(text, "in_game_txt3", language)
     return my_word, current_word
 
 def guessing_letter(already_given_letters):
