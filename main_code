@@ -170,7 +170,7 @@ def letter_check(my_word, current_word, input_letter):
         current_word = "".join(
     input_letter if my_word[i] == input_letter else current_word[i]
     for i in range(len(my_word))
-)
+    )
         print_from_imported_json(pictures, f"p{5-number_of_lives}")
         print(" ".join(current_word))
         print_from_imported_json(text, "in_game_txt3", language)
