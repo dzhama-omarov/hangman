@@ -1,659 +1,209 @@
 import time
 import random
+import json
 
-#creating a dictionary with words lists
-word_list = {
-    'en' : [
-    'Actor', 'Advertisement', 'Afternoon', 'Airport', 'Ambulance', 'Animal', 'Answer', 'Apple', 'Army', 'Australia',
-    'Balloon', 'Banana', 'Battery', 'Beach', 'Beard', 'Bed', 'Belgium', 'Boy', 'Branch', 'Breakfast', 'Brother',
-    'Camera', 'Candle', 'Car', 'Caravan', 'Carpet', 'Cartoon', 'China', 'Church', 'Crayon', 'Crowd',
-    'Daughter', 'Death', 'Denmark', 'Diamond', 'Dinner', 'Disease', 'Doctor', 'Dog', 'Dream', 'Dress',
-    'Easter', 'Egg', 'Eggplant', 'Egypt', 'Elephant', 'Energy', 'Engine', 'England', 'Evening', 'Eye',
-    'Family', 'Finland', 'Fish', 'Flag', 'Flower', 'Football', 'Forest', 'Fountain', 'France', 'Furniture',
-    'Garage', 'Garden', 'Gas', 'Ghost', 'Girl', 'Glass', 'Gold', 'Grass', 'Greece', 'Guitar',
-    'Hair', 'Hamburger', 'Helicopter', 'Helmet', 'Holiday', 'Honey', 'Horse', 'Hospital', 'House', 'Hydrogen',
-    'Ice', 'Insect', 'Insurance', 'Iron', 'Island',
-    'Jackal', 'Jelly', 'Jewelry', 'Jordan', 'Juice',
-    'Kangaroo', 'King', 'Kitchen', 'Kite', 'Knife',
-    'Lamp', 'Lawyer', 'Leather', 'Library', 'Lighter', 'Lion', 'Lizard', 'Lock', 'London', 'Lunch',
-    'Machine', 'Magazine', 'Magician', 'Manchester', 'Market', 'Match', 'Microphone', 'Monkey', 'Morning', 'Motorcycle',
-    'Nail', 'Napkin', 'Needle', 'Nest', 'Nigeria', 'Night', 'Notebook',
-    'Ocean', 'Oil', 'Orange', 'Oxygen', 'Oyster',
-    'Painting', 'Parrot', 'Pencil', 'Piano', 'Pillow', 'Pizza', 'Planet', 'Plastic', 'Portugal', 'Potato',
-    'Queen', 'Quill',
-    'Rain', 'Rainbow', 'Raincoat', 'Refrigerator', 'Restaurant', 'River', 'Rocket', 'Room', 'Rose', 'Russia',
-    'Sandwich', 'School', 'Scooter', 'Shampoo', 'Shoe', 'Soccer', 'Spoon', 'Stone', 'Sugar', 'Sweden',
-    'Teacher', 'Telephone', 'Television', 'Tent', 'Thailand', 'Tomato', 'Toothbrush', 'Traffic', 'Train', 'Truck',
-    'Uganda', 'Umbrella',
-    'Van', 'Vase', 'Vegetable', 'Vulture',
-    'Wall', 'Whale', 'Window', 'Wire',
-    'Xylophone',
-    'Yacht', 'Yak',
-    'Zebra', 'Zoo'
-],
-    'ru' : [
-    'бог',
-    'век', 'вечер', 'взгляд', 'вид', 'власть', 'вода', 'возможность', 'война', 'вопрос', 'время',
-    'глаз', 'год', 'голова', 'голос', 'город', 'государство', 'группа',
-    'дверь', 'действие', 'дело', 'день', 'деньги', 'деятельность', 'дом', 'дорога', 'друг', 'душа',
-    'жена', 'женщина', 'жизнь',
-    'закон', 'земля',
-    'имя', 'история',
-    'качество', 'книга', 'комната', 'компания', 'конец',
-    'лицо', 'любовь',
-    'мама', 'мать', 'машина', 'место', 'месяц', 'минута', 'мир', 'момент', 'мысль',
-    'народ', 'начало', 'нога', 'ночь',
-    'область', 'образ', 'общество', 'организация', 'отец', 'отношение',
-    'пора', 'порядок', 'право', 'президент', 'проблема', 'процесс', 'путь',
-    'работа', 'раз', 'развитие', 'ребенок', 'результат', 'решение', 'рука',
-    'свет', 'связь', 'сила', 'система', 'слово', 'случай', 'средство', 'статья', 'стол', 'сторона', 'страна', 'суд',
-    'театр', 'тысяча',
-    'улица', 'уровень', 'условие',
-    'форма',
-    'цель',
-    'час', 'часть', 'человек', 'число',
-    'школа',
-    'язык'
-],
-    'de' : [
-    'Abend', 'Anfang', 'Arbeit', 'Art', 'Aufgabe', 'Auge', 'Auto',
-    'Bedeutung', 'Beispiel', 'Bereich', 'Bild', 'Blick', 'Buch', 'Buch',
-    'Ding',
-    'Eltern Ende', 'Entwicklung', 'Ergebnis',
-    'Fall', 'Familie', 'Folge', 'Form Frage', 'Frau', 'Freund',
-    'Geld', 'Geschichte', 'Gesellschaft', 'Gesicht', 'Gespräch', 'Grund', 'Gruppe',
-    'Hand', 'Haus', 'Herr',
-    'Interesse',
-    'Jahr',
-    'Kind', 'Kopf', 'Krieg',
-    'Land', 'Leben', 'Leute',
-    'Mal', 'Mann', 'Mensch', 'Milliarde', 'Million', 'Minute', 'Möglichkeit', 'Moment', 'Monat', 'Morgen', 'Mutter',
-    'Nacht', 'Name',
-    'Ort',
-    'Paar', 'Person', 'Platz', 'Problem', 'Prozent',
-    'Raum', 'Recht', 'Regierung', 'Rolle',
-    'Sache', 'Schule', 'Schüler', 'Seite', 'Sinn', 'Sprache', 'Staat', 'Stadt', 'Stelle', 'Straße', 'Stück', 'Stunde', 'System',
-    'Tag', 'Teil', 'Text', 'Thema', 'Tür',
-    'Uhr', 'Uni Universität', 'Unternehmen',
-    'Vater',
-    'Wasser', 'Weg', 'Weise', 'Welt', 'Wert', 'Woche Wohnung', 'Wort',
-    'Zahl', 'Zeit', 'Ziel',
+def load_json(filename):
+    with open(filename, "r") as file:
+        return json.load(file)
 
-],
-    'fr' : [
-    'air', 'ami', 'animaux', 'appel', 'aprè-midi', 'arbre', 'argent',
-    'bois', 'bras', 'bureau', 'bureau',
-    'chambre', 'chanson', 'cheval', 'chien', 'chose', 'coeur', 'corps', 'couleurs',
-    'docteur', 'dos',
-    'eau', 'enfants', 'enfants', 'enfants', 'été', 'étoile', 'exemple',
-    'famille', 'fenêtre', 'ferme', 'feu', 'fille', 'fleur', 'fleur',
-    'glace', 'groupe',
-    'histoire', 'hiver', 'homme', 'île', 'jambe', 'jardin', 'jeune', 'jour', 'jour', 'journal',
-    'lettre', 'ligne', 'liste', 'liste', 'lit', 'lune',
-    'mar', 'marque', 'matin', 'mer', 'mère', 'minute', 'mois', 'monde', 'montagne', 'montagnes', 'montagnes', 'mot', 'musique',
-    'nom', 'nuit', 'numéro',
-    'oeil', 'oiseau',
-    'page', 'pays', 'père', 'personne', 'pied', 'porte', 'produit',
-    'question',
-    'rivière', 'roi', 'rue',
-    'science', 'semaine', 'sol', 'soleil',
-    'tables', 'terre', 'tête', 'train', 'travail',
-    'vent', 'vie', 'ville', 'vin', 'visage', 'voiture', 'voiture', 'voiture'
-    ]
-}
+text = load_json("resources/texts.json")
+pictures = load_json("resources/pictures.json")
+word_lists = load_json("resources/word_lists.json")
 
-#creating mistake images and saving them into a list
-p0 = """
-_______
-|    |
-|    O
-|   
-|   
-|
------------
-"""
-p1 = """
-_______
-|    |
-|    O
-|    |
-|    
-|
------------
-"""
-p2 = """
-_______
-|    |
-|    O
-|    |
-|    /
-|
------------
-"""
-p3 = """
-_______
-|    |
-|    O
-|    |
-|   /|
-|
------------
-"""
-p4 = """
-_______
-|    |
-|    O
-|   ||
-|   /|
-|
------------
-"""
-p5 = """
-_______      
-|    |  
-|    O  
-|   |||       
-|   /|   
-|      
------------      
-"""
-pictures = [p0, p1, p2, p3, p4, p5]
+def print_from_imported_json(resource_type, key, language="en"):
+    try:
+        imported_value = resource_type[language][key]
+        print(imported_value)
+    except KeyError:
+        print(f"No such key in json {resource_type} file.")
 
-#creating dictionary in dictionary with texts
-texts = {
-    'en' :{
-        'main_txt' : '''_______________________________Main menu_______________________________
-Welcome to Hangman game!
+def main_menu():
+    global language
+    global number_of_lives
+    while True:
+        print_from_imported_json(text,"main_menu_txt", language)
+        choice = input().lower().strip()
+        if choice == "1":
+            already_given_letters = []
+            my_word, current_word = setup_game()
+            while "_" in current_word and number_of_lives > 0:
+                input_letter = guessing_letter(already_given_letters)
+                already_given_letters.append(input_letter)
+                current_word = letter_check(my_word, current_word, input_letter)
+            end_game(my_word)
+        elif choice == "2":
+            rules_page()
+        elif choice == "3":
+            settings_menu()
+        elif choice == "4":
+            credits_page()
+        elif choice == "easter":
+            easter_egg_page()
+        else:
+            print_from_imported_json(text, "known_input_err_txt", language)
 
-1 - Start the game
-2 - Rules
-3 - Settings
-4 - Credits
-          ''',
-        'rules_txt' : '''_______________________________Rules_______________________________
-            Hangman is a simple word guessing game. 
-            Player tries to figure out an unknown word by guessing letters. 
-            If too many letters which do not appear in the word are guessed, the player is hanged (and loses).
+def rules_page():
+    global language
+    while True:
+        print_from_imported_json(text, "rules_txt", language)
+        back = input().lower().strip()
+        if back != "b":
+            print_from_imported_json(text, "unknown_input_err_txt", language)
+        else:
+            break
+    return
 
-            b - Back
-                    ''',
-        'settings_txt' : '''_______________________________Settings_______________________________
-1 - Number of lives
-2 - Language
+def easter_egg_page():
+    global language
+    while True:
+        print_from_imported_json(text, "easter_egg_txt", language)
+        back = input().lower().strip()
+        if back != "b":
+            print_from_imported_json(text, "unknown_input_err_txt", language)
+        else:
+            break
+    return
+    
+def credits_page():
+    global language
+    while True:
+        print_from_imported_json(text, "credits_txt", language)
+        back = input().lower().strip()
+        if back != "b":
+            print_from_imported_json(text, "unknown_input_err_txt", language)
+        else:
+            break
+    return
 
-b - Back
-        ''',
-        'credits_txt' : '''_______________________________Credits_______________________________
-This game was made by Omarov Dzhamaluddin as a beginner project. 
-It uses basic python language and it was made with as little AI help as possible. 
-I intentionally was using just simple internet searches, beacuse I think that its better for educational purposes.
-Hope you liked this game as much as I did programming it. Have a nice day and I wish you luck and happiness in life :)
-                    
-b - Back
-        ''',
-        'n_of_l_txt' : '''_______________________________Number of lives_______________________________
-Type in how many lives you would like to have (5 max)
+def settings_menu():
+    global language
+    while True:
+        print_from_imported_json(text, "settings_txt", language)
+        choice = input().lower().strip()
+        if choice == "1":
+            lives_settings()
+        elif choice == "2":
+            language_settings() 
+        elif choice == "b":
+            break
+        else:
+            print_from_imported_json(text, "known_input_err_txt", language)
+    return
 
-b - Back
-        ''',
-        'lang_txt' : '''_______________________________Language_______________________________
-Please, choose language:
-
-1 - English
-2 - Русский
-3 - Deutsch
-4 - Française
-
-b - Back
-        ''',
-        'easter_egg_txt' : '''
- (⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)
-(⌐■_■)Well done! You've found an easter egg (⌐■_■)
- (⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)
-
-b - Back
-        ''',
-        'sg_txt1' : '''
- ______________________
-|Let me think of a word|
- ----------------------
-            ''',
-        'sg_txt2' : '''
-Yes! I have it. Try to guess it. Here is the gallow and hidden letters:
-            ''',
-        'sg_txt3' : 'Type in a letter',
-        'sg_txt4' : 'Please, type only one letter',
-        'sg_txt5' : 'Oops, there is no such letter in my word',
-        'sg_txt6' : 'You are right! Take another guess',
-        'sg_txt7' : 'YOU WON! :)))',
-        'sg_txt8' : 'YOU LOST :(',
-        'sg_txt9' : 'The word was: ',
-        'sg_txt10' : '''
-g - Start again
-b - Main menu
-            ''',
-        'sg_txt_err' : '''
-Invalid input. Please enter "g" to restart the game or "b" to go to the main menu
-''',
-    }, 
-    'ru' :{
-        'main_txt' : '''_______________________________Главное меню_______________________________
-Добро пожаловать в игру "Виселица"!
-
-1 - Начать игру
-2 - Правила
-3 - Настройки
-4 - Об игре
-          ''',
-        'rules_txt' : '''_______________________________Правила_______________________________
-"Виселица" - это простая игра на угадывание слов. 
-Игрок пытаются разгадать неизвестное слово, угадывая буквы. 
-Если угадывается слишком много букв, которых нет в слове, игрок оказывается повешенным (и проигрывает).
-
-b - Назад
-                ''',
-        'settings_txt' : '''_______________________________Настройки_______________________________
-1 - Количество жизней
-2 - Язык
-
-b - Назад
-                ''',
-        'credits_txt' : '''_______________________________Об игре_______________________________
-Эта игра была создана Омаровым Джамалуддином в качестве проекта для начинающих. 
-В ней используется базовый язык python, и она была создана с минимальной помощью от искусственного интеллекта. 
-Я намеренно использовал простой поиск в Интернете, потому что считаю, что это лучше для образовательных целей.
-Надеюсь, вам понравилась эта игра так же, как мне понравилось ее программирование. Хорошего дня, и я желаю вам удачи и счастья в жизни :)
+def lives_settings():
+    global language
+    global number_of_lives
+    while True:
+        print_from_imported_json(text, "lives_settings_txt", language)
+        choice = input().lower().strip()
+        if choice not in ["b", "1", "2", "3", "4", "5"]:
+            print_from_imported_json(text, "known_input_err_txt", language)
+        elif choice == "b":
+            break
+        else:
+            number_of_lives = int(choice)
+            print_from_imported_json(text, "lives_changed_txt", language)
         
-b - Назад
-        ''',
-        'n_of_l_txt' : '''_______________________________Количество жизней_______________________________
-Укажите, сколько жизней вы хотели бы иметь (максимум 5)
+def language_settings():
+    global language
+    while True:
+        print_from_imported_json(text, "language_settings_txt", language)
+        choice = input().lower().strip()
+        if choice not in ["b", "1", "2", "3", "4"]:
+            print_from_imported_json(text, "known_input_err_txt", language)
+        elif choice == "1":
+            language = "en"
+            print_from_imported_json(text, "language_changed_txt", language)
+        elif choice == "2":
+            language = "ru"
+            print_from_imported_json(text, "language_changed_txt", language)
+        elif choice == "3":
+            language = "de"
+            print_from_imported_json(text, "language_changed_txt", language)
+        elif choice == "4":
+            language = "fr"
+            print_from_imported_json(text, "language_changed_txt", language) 
+        else:
+            break  
 
-b - Назад
-        ''',
-        'lang_txt' : '''_______________________________Язык_______________________________
-Пожалуйста, выберите язык:
+def setup_game():
+    global language
+    global number_of_lives
 
-1 - English
-2 - Русский
-3 - Deutsch
-4 - Française
-
-b - Назад
-        ''',
-        'easter_egg_txt' : '''
- (⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)
-(⌐■_■)Молодец! Ты нашел пасхалку (⌐■_■)
- ⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)
-
-b - Назад
-        ''',
-        'sg_txt1' : '''
- ____________________________________________
-|Дай мне минутку придумать какое-нибудь слово|
- --------------------------------------------
-        ''',
-        'sg_txt2' : '''
-Придумал! Попробуй угадать. Вот виселица и скрытые буквы:
-        ''',
-        'sg_txt3' : 'Напиши букву',
-        'sg_txt4' : 'Пожалуйста, пиши по одной букве',
-        'sg_txt5' : 'Ой, такой буквы нет в моем слове',
-        'sg_txt6' : 'Верно! Загадай новую букву',
-        'sg_txt7' : '''____________________________________________________________________
-Победа! :)))
-        ''',
-        'sg_txt8' : '''____________________________________________________________________
-Проигрыш! :(
-            ''',
-        'sg_txt9' : 'Я загадал слово: ',
-        'sg_txt10' : ''' -----------------
-|g - Начать заново|
-|b - Главное меню |
- -----------------''',
-        'sg_txt_err' : '''
-Неверный ввод. Пожалуйста, введите "g", чтобы перезапустить игру, или "b", чтобы перейти в главное меню
-'''
-    },
-    'de' :{
-        'main_txt' : '''_______________________________ Hauptmenü _______________________________
-Willkommen beim Galgenmännchen-Spiel!
-
-1 - Spiel starten
-2 - Regeln
-3 - Einstellungen
-4 - Credits
-          ''',
-        'rules_txt' : '''_______________________________Regeln_______________________________
-Hangman ist ein einfaches Wortratespiel.
-Der Spieler versucht, ein unbekanntes Wort durch Erraten von Buchstaben herauszufinden.
-Wenn zu viele Buchstaben erraten werden, die nicht im Wort vorkommen, wird der Spieler gehängt (und verliert).
-
-b - Zurück
-                ''',
-        'settings_txt' : '''_______________________________Einstellungen_______________________________
-1 - Anzahl der Leben
-2 - Sprache
-
-b - Zurück
-''',
-        'credits_txt' : '''_______________________________Credits_______________________________
-Dieses Spiel wurde von Omarov Dzhamaluddin als Anfängerprojekt entwickelt.
-Es verwendet die grundlegende Programmiersprache Python und wurde mit so wenig KI-Hilfe wie möglich erstellt.
-Ich habe absichtlich nur einfache Internetsuchen verwendet, weil ich denke, dass dies für Bildungszwecke besser ist.
-Ich hoffe, Ihnen hat dieses Spiel genauso gut gefallen wie mir beim Programmieren. Ich wünsche Ihnen einen schönen Tag und viel Glück und Freude im Leben :)
-
-b - Zurück
-''',
-        'n_of_l_txt' : '''_______________________________Anzahl der Leben_______________________________
-Geben Sie ein, wie viele Leben Sie haben möchten (max. 5)
-
-b - Zurück
-''',
-'lang_txt' : '''_______________________________Sprache_______________________________
-Bitte wählen Sie die Sprache:
-
-1 - English
-2 - Русский
-3 - Deutsch
-4 - Française
-
-b - Zurück
-''',
-        'easter_egg_txt' : '''
- (⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)
-(⌐■_■)Gut gemacht! Du hast ein Easter Egg gefunden (⌐■_■)
- (⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)
-
-b - Zurück
-''',
-        'sg_txt1' : '''
- ________________________________
-|Lass mich mir ein Wort überlegen|
- --------------------------------
-''',
-        'sg_txt2' : '''
-Ja! Ich habe es. Versuch es zu erraten. Hier sind der Galgen und die versteckten Buchstaben:
-''',
-        'sg_txt3' : 'Geben Sie einen Buchstaben ein',
-        'sg_txt4' : 'Bitte geben Sie nur einen Buchstaben ein',
-        'sg_txt5' : 'Ups, in meinem Wort ist dieser Buchstabe nicht enthalten',
-        'sg_txt6' : 'Sie haben Recht! Raten Sie noch einmal',
-        'sg_txt7' : 'SIE HABEN GEWONNEN! :)))',
-        'sg_txt8' : 'SIE HABEN VERLOREN :(',
-        'sg_txt9' : 'Das Wort war: ',
-        'sg_txt10' : '''
-g - Neu starten
-b - Hauptmenü
-''',
-        'sg_txt_err' : '''
-Ungültige Eingabe. Bitte geben Sie "g" ein, um das Spiel neu zu starten, oder "b", um zum Hauptmenü zu gelangen
-''',
-    },
-    'fr' :{
-        'main_txt' : '''_______________________________Menu principal_______________________________
-Bienvenue au jeu du pendu!
-
-1 - Démarrer le jeu
-2 - Règles
-3 - Paramètres
-4 - Crédits
-''',
-        'rules_txt' : '''_______________________________Règles_______________________________
-Le pendu est un jeu de devinettes de mots simple.
-Le joueur essaie de deviner un mot inconnu en devinant des lettres.
-Si trop de lettres qui n'apparaissent pas dans le mot sont devinées, le joueur est pendu (et perd).
-
-b - Retour
-''',
-        'settings_txt' : '''_______________________________Paramètres_______________________________
-1 - Nombre de vies
-2 - Langue
-
-b - Retour
-''',
-        'credits_txt' : '''_______________________________Crédits_______________________________
-Ce jeu a été créé par Omarov Dzhamaluddin en tant que projet pour débutants.
-Il utilise le langage Python de base et a été réalisé avec le moins d'aide possible de l'IA.
-J'ai intentionnellement utilisé uniquement des recherches Internet simples, car je pense que c'est mieux à des fins éducatives.
-J'espère que vous avez aimé ce jeu autant que j'ai aimé le programmer. Passez une bonne journée et je vous souhaite bonne chance et bonheur dans la vie :)
-
-b - Retour
-''',
-        'n_of_l_txt' : '''_______________________________Nombre de vies_______________________________
-Tapez le nombre de vies que vous souhaitez avoir (5 max)
-
-b - Retour
-''',
-        'lang_txt' : '''_______________________________Langue_______________________________
-Veuillez choisir la langue:
-
-1 - English
-2 - Русский
-3 - Deutsch
-4 - Française
-
-b - Retour
-''',
-        'easter_egg_txt' : '''
- (⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)
-(⌐■_■)Bien joué! Vous avez trouvé un œuf de Pâques (⌐■_■)
- (⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)
-
-b - Retour
-''',
-        'sg_txt1' : '''
- __________________________
-|Laisse-moi penser à un mot|
- --------------------------
-''',
-'sg_txt2' : '''
-Oui! Je l'ai. Essaie de le deviner. Voici la potence et les lettres cachées:
-''',
-'sg_txt3': 'Saisissez une lettre',
-'sg_txt4': "Veuillez ne saisir qu'une seule lettre",
-'sg_txt5': "Oups, il n'y a pas de telle lettre dans mon mot",
-'sg_txt6': 'Vous avez raison! Essayez à nouveau',
-'sg_txt7': 'VOUS AVEZ GAGNÉ! :)))',
-'sg_txt8': 'VOUS AVEZ PERDU:(',
-'sg_txt9': 'Le mot était: ',
-'sg_txt10': '''
-g - Recommencer
-b - Menu principal
-''',
-        'sg_txt_err': '''
-Entrée non valide. Veuillez saisir «g» pour redémarrer le jeu ou «b» pour accéder au menu principal
-''',
-}
-}
-
-#creating "main menu"
-def main(language = 'en', n_of_l = '5'):
-    print(texts[language]['main_txt'])
-
-    main_inp = input().lower().strip()
-
-    if main_inp == "1":
-        start_game(language,n_of_l)
-    elif main_inp == "2":
-        rules(language, n_of_l)
-    elif main_inp == "3":
-        settings(language, n_of_l)
-    elif main_inp == "4":
-        credits(language, n_of_l)
-    elif main_inp == "easter":
-        easter_egg(language, n_of_l)
-    else:
-        main(language, n_of_l)
-
-#creating rules secction
-def rules(language = 'en', n_of_l = '5'):
-    print(texts[language]['rules_txt'])
-
-    if input().lower().strip() == "b":
-        main(language, n_of_l)
-    else:
-        rules(language, n_of_l)
-
-#creating setting menu
-def settings(language = 'en', n_of_l = '5'):
-    print(texts[language]['settings_txt'])
-
-    set_input = input()
-
-    if set_input == "1":
-        n_of_l_set(language, n_of_l)
-    elif set_input == "2":
-        lang_set(language, n_of_l)
-    elif set_input == "b":
-        main(language, n_of_l)
-    else:
-        settings(language, n_of_l)
-
-#creating number of lives submenu
-def n_of_l_set(language = 'en', n_of_l = '5'):
-    print(texts[language]['n_of_l_txt'])
-
-    nofl_input = input().lower().strip()
-    if nofl_input.isdigit() == True and len(nofl_input) == 1:
-        n_of_l = int(nofl_input)
-        if language == "en":
-            print(f"Number of lives is set to {nofl_input}")
-        elif language == "ru":
-            print(f"Количество жизней установлено на {nofl_input}")
-        n_of_l_set(language, n_of_l)
-    elif nofl_input == "b":
-        settings(language, n_of_l)
-    else:
-        n_of_l_set(language, n_of_l)
-
-#creating language submenu
-def lang_set(language = 'en', n_of_l = '5'):
-    print(texts[language]['lang_txt'])
-
-    lang_input = input()
-    if lang_input == "1":
-        print("Language set to english")
-        language = "en"
-        lang_set(language, n_of_l)
-    elif lang_input == "2":
-        print("Язык установлен на русский")
-        language = "ru"
-        lang_set(language, n_of_l)
-    elif lang_input == "3":
-        print("Sprache auf Deutsch eingestellt")
-        language = "de"
-        lang_set(language, n_of_l)
-    elif lang_input == "4":
-        print("Langue définie sur français")
-        language = "fr"
-        lang_set(language, n_of_l)
-    elif lang_input == "b":
-        settings(language, n_of_l)
-    else:
-        lang_set(language, n_of_l)
-
-#creating credits secction
-def credits(language = 'en', n_of_l = '5'):
-    print(texts[language]['credits_txt'])
-
-    if input() == "b":
-        main(language, n_of_l)
-    else:
-        credits(language, n_of_l)
-
-#creating an easter egg page
-def easter_egg(language = 'en', n_of_l = '5'):
-    print(texts[language]['easter_egg_txt'])
-
-    if input() == "b":
-        main(language, n_of_l)
-    else:
-        easter_egg(language, n_of_l)
-
-#creating game code
-def start_game(language = 'en', n_of_l = '5'):
-    print(texts[language]['sg_txt1'])
-
-    #loading
-    '''for _ in range(3):
+    print_from_imported_json(text, "in_game_txt1", language)
+    for _ in range(3):
         time.sleep(0.5)
         print(".")
         time.sleep(0.5)
         print("..")
         time.sleep(0.5)
-        print("...")'''
-
-    #setting up the preperations
-    my_word = random.choice(word_list[language])
-    mistakes = 5 - int(n_of_l)
-    my_word = my_word.lower()
-    n_of_letters = len(my_word)
-    cur_word = "_" * n_of_letters
-    print(texts[language]['sg_txt2'])
-    print(pictures[mistakes])
-   
-    print("_ " * n_of_letters)
-
-    #starting a loop which ends with a win or loose
-    while cur_word.find("_") != -1 and mistakes < 5:
-        print(texts[language]['sg_txt3'])
-        input_letter = input().strip().lower()
-        letter_positions = []
-
-        #checking if input is not more than one letter
-        if len(input_letter) != 1:
-            print(texts[language]['sg_txt4'])
-        else:
-            
-            #checking if input letter is in the word
-            if my_word.find(input_letter) == -1:
-                mistakes += 1
-                print(texts[language]['sg_txt5'])
-                print(pictures[mistakes])
-                print(' '.join(cur_word))
-            else:
-                letter_positions.append(my_word.find(input_letter))
-                
-                #starting a loop of finding all occurances of input letter in a word
-                while letter_positions[-1] <= len(my_word):
-                    if my_word.find(input_letter, letter_positions[-1] + 1) != -1:
-                        letter_positions.append(my_word.find(input_letter, letter_positions[-1] + 1))
-                    else:
-                        break
-                
-                #changing all "_" to guessed letter
-                for _ in range(len(letter_positions)):
-                    x = letter_positions[_]
-                    cur_word = cur_word[0:x] + input_letter + cur_word[x+1:]
-                
-                #printing game info if not all letters are guessed
-                if cur_word.find("_") != -1:
-                    print(texts[language]['sg_txt6'])
-                    print(pictures[mistakes])
-                    print(' '.join(cur_word))
+        print("...")
+    my_word = random.choice(word_lists[language]).lower()    
+    print_from_imported_json(text, "in_game_txt2", language)
+    print_from_imported_json(pictures, f"p{5-number_of_lives}")
     
-    #choosing an end scenario
-    if mistakes < 5:
-        print(texts[language]['sg_txt7'])
-    else:
-        print(texts[language]['sg_txt8'])
-        print(texts[language]['sg_txt9'] + my_word)
-    
-    aft_g_c = 0
+    current_word = "_" * len(my_word)
+    print(" ".join(current_word))
+    print_from_imported_json(text, "in_game_txt3", language)
+    return my_word, current_word
+
+def guessing_letter(already_given_letters):
+    global language
+    global number_of_lives
+
     while True:
-        print(texts[language]['sg_txt10'])
-        
-        aft_g_c_input = input()
-        
-        if aft_g_c_input == "g":
-            start_game(language, n_of_l)
-            break
-        elif aft_g_c_input == "b":
-            main(language, n_of_l)
-            break
+        input_letter = input().lower().strip()
+        if len(input_letter) != 1 or input_letter.isalpha() == False:
+            print_from_imported_json(text, "in_game_input_err_txt", language)
+        elif input_letter in already_given_letters:
+            print_from_imported_json(text, "in_game_same_letter_txt", language)
         else:
-            print(texts[language]['sg_txt_err'])
+            break
+    return input_letter
 
+def letter_check(my_word, current_word, input_letter):
+    global language
+    global number_of_lives
+
+    if input_letter in my_word:
+        print_from_imported_json(text, "in_game_txt5", language)
+        current_word = "".join(
+    input_letter if my_word[i] == input_letter else current_word[i]
+    for i in range(len(my_word))
+)
+        print_from_imported_json(pictures, f"p{5-number_of_lives}")
+        print(" ".join(current_word))
+        print_from_imported_json(text, "in_game_txt3", language)
+        return current_word
+    else:
+        print_from_imported_json(text, "in_game_txt4", language)
+        number_of_lives -= 1
+        print_from_imported_json(pictures, f"p{5-number_of_lives}")
+        print(" ".join(current_word))
+        print_from_imported_json(text, "in_game_txt3", language)
+        return current_word
     
-main()
+def end_game(my_word):
+    global number_of_lives
+    while True:
+        if number_of_lives == 0:
+            print_from_imported_json(text, "in_game_txt7", language)
+            print_from_imported_json(text, "in_game_txt8", language)
+            print(my_word)
+            print_from_imported_json(text, "in_game_txt9", language)
+        else:
+            print_from_imported_json(text, "in_game_txt6", language)
+            print_from_imported_json(text, "in_game_txt8", language)
+            print(my_word)
+            print_from_imported_json(text, "in_game_txt9", language)
+        choice = input().lower().strip()
+        if choice not in ["b"]:
+            print_from_imported_json(text, "known_input_err_txt", language)
+        else:
+            number_of_lives = 5
+            break
+
+language = "en"
+number_of_lives = 5
+
+main_menu()
