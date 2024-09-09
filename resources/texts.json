@@ -1,6 +1,6 @@
 {
     "en" : {
-        "main_menu_txt" : "_______________________________Main menu_______________________________\nWelcome to Hangman game!\n\n1 - Start the game\n2 - Rules\n3 - Settings\n4 - Credits\n",
+        "main_menu_txt" : "_______________________________Main menu_______________________________\nWelcome to Hangman game!\n\n1 - Start the game\n2 - Rules\n3 - Settings\n4 - Credits\n5 - Clear\n6 - Exit",
         "known_input_err_txt" : "\nInput error. Please type in one of the given options",
         "rules_txt" : "_______________________________Rules_______________________________\nHangman is a simple word guessing game.\nPlayer tries to figure out an unknown word by guessing letters.\nIf too many letters which do not appear in the word are guessed, the player is hanged (and loses).\n\nb - Back",
         "unknown_input_err_txt" : "\nInput error. Unknown command",
@@ -25,7 +25,7 @@
         "in_game_txt_err" : "\nInvalid input. Please enter 'g' to restart the game or 'b' to go to the main menu"
     }, 
     "ru" :{
-        "main_menu_txt" : "_______________________________Главное меню_______________________________\nДобро пожаловать в игру 'Виселица'!\n\n1 - Начать игру\n2 - Правила\n3 - Настройки\n4 - Об игре\n",
+        "main_menu_txt" : "_______________________________Главное меню_______________________________\nДобро пожаловать в игру 'Виселица'!\n\n1 - Начать игру\n2 - Правила\n3 - Настройки\n4 - Об игре\n5 - Очистить\n6 - Выход\n",
         "known_input_err_txt" : "\nОшибка ввода. Пожалуйста, введите одно из указанных чисел",
         "rules_txt" : "_______________________________Правила_______________________________\n'Виселица' - это простая игра на угадывание слов.\nИгрок пытаются разгадать неизвестное слово, угадывая буквы.\nЕсли угадывается слишком много букв, которых нет в слове, игрок оказывается повешенным (и проигрывает).\n\nb - Назад",
         "unknown_input_err_txt" : "\nОшибка ввода. Неизвестная команда",
@@ -50,7 +50,7 @@
         "in_game_txt_err" : "\nНеверный ввод. Пожалуйста, введите 'g', чтобы перезапустить игру, или 'b', чтобы перейти в главное меню"
     },
     "de" :{
-        "main_menu_txt" : "_______________________________ Hauptmenü _______________________________\nWillkommen beim Galgenmännchen-Spiel!\n\n1 - Spiel starten\n2 - Regeln\n3 - Einstellungen\n4 - Credits\n",
+        "main_menu_txt" : "_______________________________ Hauptmenü _______________________________\nWillkommen beim Galgenmännchen-Spiel!\n\n1 - Spiel starten\n2 - Regeln\n3 - Einstellungen\n4 - Credits\n5 - Wissen\n6 - Afsluiten\n",
         "known_input_err_txt": "\nEingabefehler. Bitte geben Sie eine der bereitgestellten Zahlen ein",
         "rules_txt" : "_______________________________Regeln_______________________________\nHangman ist ein einfaches Wortratespiel.\nDer Spieler versucht, ein unbekanntes Wort durch Erraten von Buchstaben herauszufinden.\nWenn zu viele Buchstaben erraten werden, die nicht im Wort vorkommen, wird der Spieler gehängt (und verliert).\n\nb - Zurück",
         "unknown_input_err_txt" : "\nEingabefehler. Unbekannter Befehl",
@@ -75,7 +75,7 @@
         "in_game_txt_err" : "\nUngültige Eingabe. Bitte geben Sie 'g' ein, um das Spiel neu zu starten, oder 'b', um zum Hauptmenü zu gelangen"
     },
     "fr" :{
-        "main_menu_txt" : "_______________________________Menu principal_______________________________\nBienvenue au jeu du pendu!\n\n1 - Démarrer le jeu\n2 - Règles\n3 - Paramètres\n4 - Crédits\n",
+        "main_menu_txt" : "_______________________________Menu principal_______________________________\nBienvenue au jeu du pendu!\n\n1 - Démarrer le jeu\n2 - Règles\n3 - Paramètres\n4 - Crédits\n5 - Effacer\n6 - Quitter\n",
         "known_input_err_txt" : "\nErreur de saisie. Veuillez saisir l'un des numéros fournis",
         "rules_txt" : "_______________________________Règles_______________________________\nLe pendu est un jeu de devinettes de mots simple.\nLe joueur essaie de deviner un mot inconnu en devinant des lettres.\nSi trop de lettres qui n'apparaissent pas dans le mot sont devinées, le joueur est pendu (et perd).\n\nb - Retour",
         "unknown_input_err_txt" : "\nErreur de saisie. Commande inconnue",
@@ -84,7 +84,7 @@
         "lives_settings_txt" : "_______________________________Nombre de vies_______________________________\nTapez le nombre de vies que vous souhaitez avoir (5 max)\n\nb - Retour",
         "lives_changed_txt" : "________________________________________________________\nNombre de vies modifiées",
         "language_settings_txt" : "_______________________________Langue_______________________________\nVeuillez choisir la langue:\n\n1 - English\n2 - Русский\n3 - Deutsch\n4 - Française\n\nb - Retour",
-        "langage_changed_txt" : "Langue définie sur Français",
+        "language_changed_txt" : "Langue définie sur Français",
         "easter_egg_txt" : "\n (⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)\n(⌐■_■)Bien joué! Vous avez trouvé un œuf de Pâques (⌐■_■)\n (⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)(⌐■_■)\n\nb - Retour",
         "in_game_txt1" : "\n __________________________\n|Laisse-moi penser à un mot|\n --------------------------",
         "in_game_txt2" : "\nOui! Je l'ai. Essaie de le deviner. Voici la potence et les lettres cachées:",
