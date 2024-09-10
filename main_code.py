@@ -24,7 +24,7 @@ def print_from_imported_json(resource_type, key, language="en") -> None:
         pprint(resource_type)
 
 def clear_previous_line(length_of_line=100) -> None:
-    print ("\033[A" + ' '*length_of_line + "\033[A", end="\r")
+    print ("\033[A" + ' '*length_of_line + "\033[A")
 
 def clear_terminal() -> None:
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -58,11 +58,11 @@ def main_menu() -> None:
             if language == "en":
                 print("\nCya next time!")
             elif language == "ru":
-                print("\nСайя в следующий раз!")
+                print("\nУвидимся в следующий раз!")
             elif language == "de":
-                print("\nCynthia volgende keer!")
+                print("\nAuf Wiedersehen!")
             elif language == "fr":
-                print("\nCya la prochaine fois!")
+                print("\nAu revoir!")
             exit(0)
         elif choice == "easter":
             easter_egg_page()
