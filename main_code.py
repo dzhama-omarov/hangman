@@ -1,10 +1,12 @@
-import time
 import random
+import time
 import json
+import os
+from pprint import pprint
 
-
-def load_json(filename):
-    with open(filename, "r") as file:
+# Load json data from filepath
+def load_json(filename) -> dict:
+    with open(filename, "r", encoding="utf8") as file:
         return json.load(file)
 
 
@@ -13,15 +15,21 @@ pictures = load_json("resources/pictures.json")
 word_lists = load_json("resources/word_lists.json")
 
 
-def print_from_imported_json(resource_type, key, language="en"):
+def print_from_imported_json(resource_type, key, language="en") -> None:
     try:
         imported_value = resource_type[language][key]
         print(imported_value)
     except KeyError:
-        print(f"No such key in json {resource_type} file.")
+        print("KeyError! Could not find key:", key, "Dictionary/Json below:")
+        pprint(resource_type)
 
+def clear_previous_line(length_of_line=100) -> None:
+    print ("\033[A" + ' '*length_of_line + "\033[A", end="\r")
 
-def main_menu():
+def clear_terminal() -> None:
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+def main_menu() -> None:
     global language
     global number_of_lives
     while True:
@@ -44,13 +52,25 @@ def main_menu():
             settings_menu()
         elif choice == "4":
             credits_page()
+        elif choice == "5":
+            clear_terminal()
+        elif choice == "6":
+            if language == "en":
+                print("\nCya next time!")
+            elif language == "ru":
+                print("\nСайя в следующий раз!")
+            elif language == "de":
+                print("\nCynthia volgende keer!")
+            elif language == "fr":
+                print("\nCya la prochaine fois!")
+            exit(0)
         elif choice == "easter":
             easter_egg_page()
         else:
             print_from_imported_json(text, "known_input_err_txt", language)
 
 
-def rules_page():
+def rules_page() -> None:
     global language
     while True:
         print_from_imported_json(text, "rules_txt", language)
@@ -62,7 +82,7 @@ def rules_page():
     return
 
 
-def easter_egg_page():
+def easter_egg_page() -> None:
     global language
     while True:
         print_from_imported_json(text, "easter_egg_txt", language)
@@ -74,7 +94,7 @@ def easter_egg_page():
     return
 
 
-def credits_page():
+def credits_page() -> None:
     global language
     while True:
         print_from_imported_json(text, "credits_txt", language)
@@ -86,7 +106,7 @@ def credits_page():
     return
 
 
-def settings_menu():
+def settings_menu() -> None:
     global language
     while True:
         print_from_imported_json(text, "settings_txt", language)
@@ -102,7 +122,7 @@ def settings_menu():
     return
 
 
-def lives_settings():
+def lives_settings() -> None:
     global language
     global number_of_lives
     while True:
@@ -117,7 +137,7 @@ def lives_settings():
             print_from_imported_json(text, "lives_changed_txt", language)
 
 
-def language_settings():
+def language_settings() -> None:
     global language
     while True:
         print_from_imported_json(text, "language_settings_txt", language)
@@ -140,18 +160,22 @@ def language_settings():
             break
 
 
-def setup_game():
+def setup_game() -> tuple[str, str]:
     global language
     global number_of_lives
 
     print_from_imported_json(text, "in_game_txt1", language)
     for _ in range(3):
-        time.sleep(0.5)
         print(".")
         time.sleep(0.5)
+        clear_previous_line()
         print("..")
         time.sleep(0.5)
+        clear_previous_line()
         print("...")
+        time.sleep(0.5)
+        clear_previous_line()
+    
     my_word = random.choice(word_lists[language]).lower()
     print_from_imported_json(text, "in_game_txt2", language)
     print_from_imported_json(pictures, f"p{5-number_of_lives}")
@@ -162,7 +186,7 @@ def setup_game():
     return my_word, current_word
 
 
-def guessing_letter(already_given_letters):
+def guessing_letter(already_given_letters) -> str:
     global language
     global number_of_lives
 
@@ -177,7 +201,7 @@ def guessing_letter(already_given_letters):
     return input_letter
 
 
-def letter_check(my_word, current_word, input_letter):
+def letter_check(my_word, current_word, input_letter) -> str:
     global language
     global number_of_lives
 
@@ -201,7 +225,7 @@ def letter_check(my_word, current_word, input_letter):
         return current_word
 
 
-def end_game(my_word):
+def end_game(my_word) -> None:
     global number_of_lives
     while True:
         if number_of_lives == 0:
