@@ -4,6 +4,7 @@ import json
 import os
 from pprint import pprint
 
+
 # Load json data from filepath
 def load_json(filename) -> dict:
     with open(filename, "r", encoding="utf8") as file:
@@ -23,11 +24,14 @@ def print_from_imported_json(resource_type, key, language="en") -> None:
         print("KeyError! Could not find key:", key, "Dictionary/Json below:")
         pprint(resource_type)
 
+
 def clear_previous_line(length_of_line=100) -> None:
-    print ("\033[A" + ' '*length_of_line + "\033[A")
+    print("\033[A" + ' '*length_of_line + "\033[A")
+
 
 def clear_terminal() -> None:
     os.system('cls' if os.name == 'nt' else 'clear')
+
 
 def main_menu() -> None:
     global language
@@ -175,7 +179,7 @@ def setup_game() -> tuple[str, str]:
         print("...")
         time.sleep(0.5)
         clear_previous_line()
-    
+
     my_word = random.choice(word_lists[language]).lower()
     print_from_imported_json(text, "in_game_txt2", language)
     print_from_imported_json(pictures, f"p{5-number_of_lives}")
