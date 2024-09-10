@@ -50,7 +50,7 @@
         "in_game_txt_err" : "\nНеверный ввод. Пожалуйста, введите 'g', чтобы перезапустить игру, или 'b', чтобы перейти в главное меню"
     },
     "de" :{
-        "main_menu_txt" : "_______________________________ Hauptmenü _______________________________\nWillkommen beim Galgenmännchen-Spiel!\n\n1 - Spiel starten\n2 - Regeln\n3 - Einstellungen\n4 - Credits\n5 - Wissen\n6 - Afsluiten\n",
+        "main_menu_txt" : "_______________________________ Hauptmenü _______________________________\nWillkommen beim Galgenmännchen-Spiel!\n\n1 - Spiel starten\n2 - Regeln\n3 - Einstellungen\n4 - Credits\n5 - Löschen\n6 - Beenden\n",
         "known_input_err_txt": "\nEingabefehler. Bitte geben Sie eine der bereitgestellten Zahlen ein",
         "rules_txt" : "_______________________________Regeln_______________________________\nHangman ist ein einfaches Wortratespiel.\nDer Spieler versucht, ein unbekanntes Wort durch Erraten von Buchstaben herauszufinden.\nWenn zu viele Buchstaben erraten werden, die nicht im Wort vorkommen, wird der Spieler gehängt (und verliert).\n\nb - Zurück",
         "unknown_input_err_txt" : "\nEingabefehler. Unbekannter Befehl",
